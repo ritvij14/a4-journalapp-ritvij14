@@ -1,8 +1,10 @@
 package androidsamples.java.journalapp
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -29,6 +31,7 @@ class JournalRepository(context: Context) {
     }
 
     init {
+        Log.d("JOURNAL_REPO_CONSTR", "creating db")
         val db = Room.databaseBuilder(
             context.applicationContext,
             JournalRoomDatabase::class.java,
@@ -41,7 +44,19 @@ class JournalRepository(context: Context) {
         mExecutor.execute { mJournalEntryDao!!.insert(entry) }
     }
 
-    fun getAllEntries(): LiveData<List<JournalEntry?>?>? {
+    fun delete(entry: JournalEntry?) {
+        mExecutor.execute { mJournalEntryDao!!.delete(entry) }
+    }
+
+    fun update(entry: JournalEntry?) {
+        mExecutor.execute { mJournalEntryDao!!.update(entry) }
+    }
+
+    fun getAllEntries(): LiveData<List<JournalEntry>> {
         return mJournalEntryDao!!.allEntries
+    }
+
+    fun getEntry(id: UUID): LiveData<JournalEntry?>? {
+        return mJournalEntryDao!!.getEntry(id)
     }
 }

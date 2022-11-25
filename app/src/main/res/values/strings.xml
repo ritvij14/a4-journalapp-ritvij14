@@ -14,4 +14,8 @@
     <string name="item_date_placeholder">Date</string>
     <string name="item_start_time_placeholder">Start time</string>
     <string name="item_end_time_placeholder">End Time</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="info">Info</string>
+    <string name="info_string">Welcome to Journal App. Using this app you can create journal entries. Not only can you add date and time for your entries, you can also share them on other social media with your friends.</string>
 </resources>
